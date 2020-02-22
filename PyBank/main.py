@@ -60,10 +60,10 @@ with open(csvpath) as csvfile:
 # Export text file with results 
 output_file = os.path.join("Output", "budget_results.csv")
 
-with open(output_file,"x") as csvfile:
+with open(output_file,"w") as csvfile:
     csvwriter = csv.writer(csvfile, delimiter=",")
 
     # Create headers
     csvwriter.writerow(["Total Months", "Total", "Average Change", "Greatest Increase in Profit", "Greatest Decrease in Profit"])
-    csvwriter.writerow([months_count, "$" + str(total_profit), "$" + str(average(profit_change)), str(greatest_increase(profit_change)), str(greatest_decrease(profit_change))])
+    csvwriter.writerow([str(months_count), "$" + str(total_profit), "$" + str(average(profit_change)), str(greatest_increase(profit_change)), str(greatest_decrease(profit_change))])
 
