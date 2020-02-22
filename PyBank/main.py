@@ -1,6 +1,5 @@
 import csv
 import os
-import sys
 
 csvpath = os.path.join("Downloads", "budget_data.csv")
 
