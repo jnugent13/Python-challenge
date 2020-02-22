@@ -2,7 +2,7 @@ import csv
 import os
 import sys
 
-csvpath = os.path.join("budget_data.csv")
+csvpath = os.path.join("Downloads", "budget_data.csv")
 
 # Lists to store data
 date = []
@@ -19,7 +19,7 @@ with open(csvpath) as csvfile:
         # Add date
         date.append(row[0])
         # Add profit/loss
-        profit.append(row[1])
+        profit.append(int(row[1]))
 
         # Get total months listed in dataset
         months_count = len(date)
@@ -27,10 +27,15 @@ with open(csvpath) as csvfile:
         # Net total of profit and losses over time period
         total_profit = sum(profit)
 
+        # Profit change over period
+        profit_change = [j-i for i, j in zip(profit[:-1], profit[1:])]
+        profit_change.insert(0,0)
+        total_change = sum(profit_change)
+
         # Average in changes of profit and losses over time period
-        def average(profit):
-            length = len(profit)
-            return total_profit / length
+        def average(profit_change):
+            length = len(profit_change) - 1
+            return '${:,.2f}'.format(total_change / length)
 
         # Greatest increase in profits (date and amount) over time period
         def greatest_increase(profit):
@@ -44,13 +49,13 @@ with open(csvpath) as csvfile:
             greatest_loss = min(profit)
             return greatest_loss
 
-        # Print analysis to terminal
-        print('Financial Analysis')
-        print('-----------------------------------')
-        print(f'Total Months: {str(months_count)}')
-        print(f'Total: ${str(total_profit)}')
-        print(f'Average Change: ${str(average(profit))}')
-        print(f'Greatest Increase in Profits: ${str(greatest_increase(profit))}')
-        print(f'Greatest Decrease in Profit: ${str(greatest_decrease(profit))}')
+    # Print analysis to terminal
+    print('Financial Analysis')
+    print('-----------------------------------')
+    print(f'Total Months: {str(months_count)}')
+    print(f'Total: ${str(total_profit)}')
+    print(f'Average Change: ${str(average(profit))}')
+    print(f'Greatest Increase in Profits: ${str(greatest_increase(profit))}')
+    print(f'Greatest Decrease in Profit: ${str(greatest_decrease(profit))}')
 
 # Export text file with results 
