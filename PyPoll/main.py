@@ -1,7 +1,7 @@
 import csv
 import os
 
-csvpath = os.path.join("Downloads", "election_data.csv")
+csvpath = os.path.join("Resources", "election_data.csv")
 
 # Lists to store data
 votes = []

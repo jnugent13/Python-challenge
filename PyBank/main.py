@@ -1,7 +1,7 @@
 import csv
 import os
 
-csvpath = os.path.join("Downloads", "budget_data.csv")
+csvpath = os.path.join("Resources", "budget_data.csv")
 
 # Lists to store data
 date = []
