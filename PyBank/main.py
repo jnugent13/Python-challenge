@@ -54,7 +54,16 @@ with open(csvpath) as csvfile:
     print(f'Total Months: {str(months_count)}')
     print(f'Total: ${str(total_profit)}')
     print(f'Average Change: ${str(average(profit_change))}')
-    print(f'Greatest Increase in Profits: {str(greatest_increase(profit_change))}')
+    print(f'Greatest Increase in Profit: {str(greatest_increase(profit_change))}')
     print(f'Greatest Decrease in Profit: {str(greatest_decrease(profit_change))}')
 
 # Export text file with results 
+output_file = os.path.join("Output", "budget_results.csv")
+
+with open(output_file,"x") as csvfile:
+    csvwriter = csv.writer(csvfile, delimiter=",")
+
+    # Create headers
+    csvwriter.writerow(["Total Months", "Total", "Average Change", "Greatest Increase in Profit", "Greatest Decrease in Profit"])
+    csvwriter.writerow([months_count, "$" + str(total_profit), "$" + str(average(profit_change)), str(greatest_increase(profit_change)), str(greatest_decrease(profit_change))])
+
