@@ -2,7 +2,7 @@ import csv
 import os
 import sys
 
-csvpath = os.path.join("../Resources", "budget_data.csv")
+csvpath = os.path.join("budget_data.csv")
 
 # Lists to store data
 date = []
@@ -53,4 +53,4 @@ with open(csvpath) as csvfile:
         print(f'Greatest Increase in Profits: ${str(greatest_increase(profit))}')
         print(f'Greatest Decrease in Profit: ${str(greatest_decrease(profit))}')
 
-        # Export text file with results 
+# Export text file with results 
