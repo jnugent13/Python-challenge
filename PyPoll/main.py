@@ -4,7 +4,7 @@ import os
 csvpath = os.path.join("Resources", "election_data.csv")
 
 # Lists to store data
-votes = []
+voters = []
 candidates = []
 
 # Open the csv file
@@ -16,12 +16,12 @@ with open(csvpath) as csvfile:
 
     for row in csvreader:
         # Add votes
-        votes.append(int(row[0]))
+        voters.append(row[0])
         # Add candidates
         candidates.append(row[2])
 
         #Get total votes
-        total_votes = sum(votes)
+        total_votes = len(voters)
 
         # Create list of unique candidates
         unique_list = []
@@ -34,7 +34,7 @@ with open(csvpath) as csvfile:
         for candidate in unique_list:
             candidate_total = 0
             if row[2] == candidate:
-                candidate_total = candidate_total + int(row[0])
+                candidate_total = candidate_total + 1
             vote_totals.append(candidate_total)
 
     # Print analysis to terminal
@@ -50,6 +50,7 @@ output_file = os.path.join("Output", "election_results.csv")
 with open(output_file, "w") as csvfile:
     csvwriter = csv.writer(output_file, delimiter=",")
 
-    #Create headers
+    # Create headers
     csvwriter.writerow(["Total", unique_list])
+    # Create row
     csvwriter.writerow([str(total_votes), str(vote_totals)])
