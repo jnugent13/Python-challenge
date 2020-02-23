@@ -9,13 +9,15 @@ candidates = []
 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvpath, delimiter=",")
-    header = next(csvreader)
+
+    # Skip the header
+    header = next(csvfile)
 
     for row in csvreader:
         # Add votes
-        votes.append(row[0])
+        votes.append(int(row[0]))
         # Add candidates
-        candidates.append(row[1])
+        candidates.append(str(row[0]))
 
         #Get total votes
         total_votes = sum(votes)
@@ -26,7 +28,16 @@ with open(csvpath) as csvfile:
             for name in candidates:
                 if name not in unique_list:
                     unique_list.append(name)
-            
+            return unique_list
+        
+        # Get votes for each candidate
+        def cadidate_votes(candidate):
+            for candidate in candidates:
+                candidate_total = 0
+                if row[2] == candidate:
+                    candidate_total = candidate_total + int(row[0])
+                return candidate_total
+
 
     # Print analysis to terminal
     print("Election Results")
