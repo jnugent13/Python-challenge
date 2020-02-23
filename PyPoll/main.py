@@ -30,18 +30,26 @@ with open(csvpath) as csvfile:
                 unique_list.append(name)
         
         # Get votes for each candidate
-        def cadidate_votes(candidate):
-            for candidate in unique_list:
-                candidate_total = 0
-                if row[2] == candidate:
-                    candidate_total = candidate_total + int(row[0])
-                return candidate_total
+        vote_totals = []
+        for candidate in unique_list:
+            candidate_total = 0
+            if row[2] == candidate:
+                candidate_total = candidate_total + int(row[0])
+            vote_totals.append(candidate_total)
 
     # Print analysis to terminal
     print("Election Results")
     print("-----------------------")
     print(f'Total Votes: {str(total_votes)}')
     print("-----------------------")
-    print(f'{str(unique_list)}')
+    print(f'{str(unique_list)}: {str(vote_totals)}')
 
 # Export text file with results
+output_file = os.path.join("Output", "election_results.csv")
+
+with open(output_file, "w") as csvfile:
+    csvwriter = csv.writer(output_file, delimiter=",")
+
+    #Create headers
+    csvwriter.writerow(["Total", unique_list])
+    csvwriter.writerow([str(total_votes), str(vote_totals)])
